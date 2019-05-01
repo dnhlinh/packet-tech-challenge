@@ -1,0 +1,47 @@
+#!/usr/bin/python
+import packet
+
+print("TECH CHALLENGE - PACKET")
+
+
+manager = packet.Manager(auth_token="yBnPckWvzktJCr8C3pcrcuANHmwBihcE")
+
+projects = manager.list_projects()
+for project in projects:
+         print(project)
+
+print("MENU: 1. Create a device; 2. List all devices; 3. Delete a device; 4. List all facilities; 5. List all operating systems")
+
+option = int(input("Enter your option or 0 to quit:"))
+
+while option != 0:
+        if option ==1:
+                device = manager.create_device(project_id='ca73364c-6023-4935-9137-2132e73c20b4',
+                               hostname='linh',
+                               plan='baremetal_1', facility='yyz1',
+                               operating_system='ubuntu_17_04')
+        elif option == 2:
+                params = {
+                        'per_page': 50
+                }
+                devices = manager.list_devices(project_id='ca73364c-6023-4935-9137-2132e73c20b4', params = params)
+                print(devices)
+
+        elif option == 3:
+                device_id = raw_input("Enter device ID:")
+                device = manager.get_device(device_id)
+                device.delete()
+        
+        elif option == 4:
+                print("LIST OF FACILITIES")
+                facilities = manager.list_facilities()
+                for facility in facilities:
+                        print(facility)
+
+        elif option == 5:
+                print("LIST OF OPERATING SYSTEMS")
+                operating_systems = manager.list_operating_systems()
+                for os in operating_systems:
+                        print(os)
+
+        option = int(input("Enter your option or 0 to quit:"))
