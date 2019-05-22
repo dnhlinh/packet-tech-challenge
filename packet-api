@@ -4,7 +4,7 @@ import packet
 print("TECH CHALLENGE - PACKET")
 
 
-manager = packet.Manager(auth_token="yBnPckWvzktJCr8C3pcrcuANHmwBihcE")
+manager = packet.Manager(auth_token="")
 
 projects = manager.list_projects()
 for project in projects:
